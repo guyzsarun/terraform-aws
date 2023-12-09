@@ -14,3 +14,12 @@ variable "aws_credentials" {
 variable "ssh_key_pair" {
   type = string
 }
+
+variable "eks-config" {
+  type = object({
+    name = string
+    version = string
+    min_node = number
+    max_node = number
+  })
+}

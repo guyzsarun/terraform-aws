@@ -76,7 +76,4 @@ locals {
 resource "local_file" "kubeconfig" {
   content  = local.kubeconfig
   filename = "kubeconfig_${module.eks.cluster_name}"
-  lifecycle {
-    prevent_destroy = true
-  }
 }

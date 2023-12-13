@@ -12,7 +12,6 @@ output "private-vm" {
     name              = aws_instance.private-vm.tags_all["Name"]
     availability_zone = aws_instance.private-vm.availability_zone
     private_ip        = aws_instance.private-vm.private_ip
-    public_ip         = aws_instance.private-vm.public_ip
   }
 }
 

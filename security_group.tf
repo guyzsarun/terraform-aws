@@ -65,3 +65,59 @@ resource "aws_vpc_security_group_egress_rule" "allow_egress_rule_ipv6" {
   ip_protocol = -1
   cidr_ipv6   = "::/0"
 }
+
+resource "aws_network_acl" "main-vpc-nacl-public" {
+  vpc_id = aws_vpc.main-vpc.id
+  subnet_ids =[for i in aws_subnet.main-vpc-subnet-public : i.id]
+
+  egress {
+    protocol   = -1
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
+  }
+
+  ingress {
+    protocol   = -1
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
+  }
+
+  tags = {
+    Name = "main-vpc-nacl-public"
+    Type = "public"
+  }
+}
+
+resource "aws_network_acl" "main-vpc-nacl-private" {
+  vpc_id = aws_vpc.main-vpc.id
+  subnet_ids = [for i in aws_subnet.main-vpc-subnet-private : i.id]
+
+  egress {
+    protocol   = -1
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
+  }
+
+  ingress {
+    protocol   = -1
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
+  }
+
+  tags = {
+    Name = "main-vpc-nacl-private"
+    Type = "private"
+  }
+}

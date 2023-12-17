@@ -7,7 +7,7 @@ module "eks" {
   cluster_version = var.eks-config.version
 
   vpc_id     = aws_vpc.main-vpc.id
-  subnet_ids = [ for i in aws_subnet.main-vpc-subnet-private  : i.id]
+  subnet_ids = [for i in aws_subnet.main-vpc-subnet-private : i.id]
 
   cluster_endpoint_public_access = true
   eks_managed_node_groups = {
@@ -53,19 +53,19 @@ locals {
       name = "terraform"
       user = {
         exec = {
-          apiVersion = "client.authentication.k8s.io/v1beta1"
-          command= "aws"
-          interactiveMode= "IfAvailable"
-          provideClusterInfo= false
+          apiVersion         = "client.authentication.k8s.io/v1beta1"
+          command            = "aws"
+          interactiveMode    = "IfAvailable"
+          provideClusterInfo = false
           args = [
-           "--region",
-           split(":",module.eks.cluster_arn)[3],
-           "eks",
-           "get-token",
-           "--cluster-name",
-           "${module.eks.cluster_name}",
-           "--output",
-           "json"
+            "--region",
+            split(":", module.eks.cluster_arn)[3],
+            "eks",
+            "get-token",
+            "--cluster-name",
+            "${module.eks.cluster_name}",
+            "--output",
+            "json"
           ]
         }
       }

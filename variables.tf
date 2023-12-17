@@ -17,8 +17,8 @@ variable "ssh_key_pair" {
 
 variable "eks-config" {
   type = object({
-    name = string
-    version = string
+    name     = string
+    version  = string
     min_node = number
     max_node = number
   })

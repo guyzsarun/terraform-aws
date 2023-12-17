@@ -65,15 +65,21 @@ resource "aws_route_table" "main-vpc-private-routetable" {
 }
 
 resource "aws_route_table_association" "route-assoc-private" {
-  subnet_id      = each.value.id
+  subnet_id      = aws_subnet.main-vpc-subnet-private[count.index].id
   route_table_id = aws_route_table.main-vpc-private-routetable.id
-  for_each       = { for i, subnet in aws_subnet.main-vpc-subnet-private : subnet.id => subnet }
+  count          = length(aws_subnet.main-vpc-subnet-private)
+
+
+  depends_on = [aws_subnet.main-vpc-subnet-private]
 }
 
 resource "aws_route_table_association" "route-assoc-public" {
-  subnet_id      = each.value.id
+  subnet_id      = aws_subnet.main-vpc-subnet-public[count.index].id
   route_table_id = aws_route_table.main-vpc-public-routetable.id
-  for_each       = { for i, subnet in aws_subnet.main-vpc-subnet-public : subnet.id => subnet }
+  count          = length(aws_subnet.main-vpc-subnet-public)
+
+
+  depends_on = [aws_subnet.main-vpc-subnet-public]
 }
 
 resource "aws_internet_gateway" "gw" {

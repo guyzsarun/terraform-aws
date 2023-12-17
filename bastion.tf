@@ -11,7 +11,7 @@ resource "aws_instance" "bastion-vm" {
 
   subnet_id = aws_subnet.main-vpc-subnet-public[0].id
 
-  user_data =  "${file("helper/init.sh")}"
+  user_data = file("helper/init.sh")
 
   vpc_security_group_ids = [
     aws_security_group.allow_ssh.id,

@@ -1,5 +1,5 @@
 variable "ssh_key_pair" {
-  type = string
+  type      = string
   sensitive = true
 }
 
@@ -12,11 +12,11 @@ variable "instance_type" {
 }
 
 variable "vm_name" {
-  type =string
+  type = string
 }
 
 variable "subnet_id" {
-  type=string
+  type = string
 }
 
 variable "security_group_ids" {
@@ -24,6 +24,6 @@ variable "security_group_ids" {
 }
 
 variable "init_script" {
-  type = string
+  type    = string
   default = null
 }

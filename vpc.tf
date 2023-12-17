@@ -55,7 +55,7 @@ resource "aws_route_table" "main-vpc-private-routetable" {
   vpc_id = aws_vpc.main-vpc.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat-gw.id
   }
 
@@ -91,7 +91,7 @@ resource "aws_internet_gateway" "gw" {
 }
 
 resource "aws_eip" "nat" {
-  domain   = "vpc"
+  domain = "vpc"
   tags = {
     Name = "${var.vpc_name}-nat"
   }

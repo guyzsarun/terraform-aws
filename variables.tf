@@ -3,7 +3,7 @@ variable "vm_ami" {
 }
 
 variable "vpc_name" {
-  type = string
+  type    = string
   default = "default-vpc"
 }
 

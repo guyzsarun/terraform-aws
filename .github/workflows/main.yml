@@ -23,7 +23,7 @@ jobs:
         run: |
           if ! terraform fmt -recursive -check; then
             echo 'Please run  "terraform fmt -recursive" '
-            return 1
+            exit 1
           fi
 
       - name: Validate

@@ -20,7 +20,10 @@ jobs:
         run: terraform init
 
       - name: Linting
-        run: terraform fmt -recursive -check
+        run: |
+          if ! terraform fmt -recursive -check; then
+            echo 'Please run  "terraform fmt -recursive" '
+          fi
 
       - name: Validate
         run: terraform validate

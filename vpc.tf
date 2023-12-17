@@ -4,7 +4,7 @@ resource "aws_vpc" "main-vpc" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "main-vpc"
+    Name = var.vpc_name
   }
 }
 
@@ -20,7 +20,7 @@ resource "aws_subnet" "main-vpc-subnet-private" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "main-vpc-${data.aws_availability_zones.available.names[count.index]}-private"
+    Name = "${var.vpc_name}-${data.aws_availability_zones.available.names[count.index]}-private"
     Type = "private"
   }
 }
@@ -33,7 +33,7 @@ resource "aws_subnet" "main-vpc-subnet-public" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "main-vpc-${data.aws_availability_zones.available.names[count.index]}-public"
+    Name = "${var.vpc_name}-${data.aws_availability_zones.available.names[count.index]}-public"
     Type = "public"
   }
 }
@@ -47,7 +47,7 @@ resource "aws_route_table" "main-vpc-public-routetable" {
   }
 
   tags = {
-    Name = "main-vpc-public-routetable"
+    Name = "${var.vpc_name}-public-routetable"
   }
 }
 
@@ -55,12 +55,12 @@ resource "aws_route_table" "main-vpc-private-routetable" {
   vpc_id = aws_vpc.main-vpc.id
 
   route {
-    cidr_block     = "0.0.0.0/0"
+    cidr_block = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat-gw.id
   }
 
   tags = {
-    Name = "main-vpc-private-routetable"
+    Name = "${var.vpc_name}-private-routetable"
   }
 }
 
@@ -86,14 +86,14 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main-vpc.id
 
   tags = {
-    Name = "internet-gw"
+    Name = "${var.vpc_name}-internet-gw"
   }
 }
 
 resource "aws_eip" "nat" {
-  domain = "vpc"
+  domain   = "vpc"
   tags = {
-    Name = "nat"
+    Name = "${var.vpc_name}-nat"
   }
 }
 
@@ -103,7 +103,7 @@ resource "aws_nat_gateway" "nat-gw" {
   subnet_id     = aws_subnet.main-vpc-subnet-public[0].id
 
   tags = {
-    Name = "nat-gw"
+    Name = "${var.vpc_name}-nat-gw"
   }
 
   depends_on = [aws_internet_gateway.gw]

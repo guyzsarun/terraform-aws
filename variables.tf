@@ -2,6 +2,11 @@ variable "vm_ami" {
   default = "ami-02453f5468b897e31"
 }
 
+variable "vpc_name" {
+  type = string
+  default = "default-vpc"
+}
+
 variable "aws_credentials" {
   sensitive = true
   type = object({

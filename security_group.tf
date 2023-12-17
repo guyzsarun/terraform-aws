@@ -67,8 +67,8 @@ resource "aws_vpc_security_group_egress_rule" "allow_egress_rule_ipv6" {
 }
 
 resource "aws_network_acl" "main-vpc-nacl-public" {
-  vpc_id     = aws_vpc.main-vpc.id
-  subnet_ids = [for i in aws_subnet.main-vpc-subnet-public : i.id]
+  vpc_id = aws_vpc.main-vpc.id
+  subnet_ids =[for i in aws_subnet.main-vpc-subnet-public : i.id]
 
   egress {
     protocol   = -1
@@ -95,7 +95,7 @@ resource "aws_network_acl" "main-vpc-nacl-public" {
 }
 
 resource "aws_network_acl" "main-vpc-nacl-private" {
-  vpc_id     = aws_vpc.main-vpc.id
+  vpc_id = aws_vpc.main-vpc.id
   subnet_ids = [for i in aws_subnet.main-vpc-subnet-private : i.id]
 
   egress {

@@ -9,7 +9,8 @@ module "bastion" {
 
   security_group_ids = [
     aws_security_group.allow_ssh.id,
-  aws_security_group.allow_egress.id]
+    aws_security_group.allow_egress.id
+  ]
 }
 
 module "private_bastion" {

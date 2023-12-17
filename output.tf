@@ -17,15 +17,15 @@ output "private-vm" {
 
 output "nat-gateway" {
   value = {
-    public_ip = aws_nat_gateway.nat-gw.public_ip
+    public_ip  = aws_nat_gateway.nat-gw.public_ip
     private_ip = aws_nat_gateway.nat-gw.private_ip
   }
 }
 
-output "eks"{
+output "eks" {
   value = {
-    cluster_name = module.eks.cluster_name
-    cluster_endpoint = module.eks.cluster_endpoint
+    cluster_name           = module.eks.cluster_name
+    cluster_endpoint       = module.eks.cluster_endpoint
     get_kubeconfig_command = "aws eks update-kubeconfig --name ${module.eks.cluster_name}"
   }
 }

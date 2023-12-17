@@ -1,0 +1,30 @@
+name: terraform
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Init
+        run: terraform init
+
+      - name: Linting
+        run: |
+          if ! terraform fmt -recursive -check; then
+            echo 'Please run  "terraform fmt -recursive" '
+            exit 1
+          fi
+
+      - name: Validate
+        run: terraform validate

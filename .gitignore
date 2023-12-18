@@ -5,6 +5,7 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
+kubeconfig*
 
 # Crash log files
 crash.log

@@ -16,8 +16,8 @@ output "private-bastion-vm" {
 
 output "nat-gateway" {
   value = {
-    public_ip  = aws_nat_gateway.nat-gw.public_ip
-    private_ip = aws_nat_gateway.nat-gw.private_ip
+    public_ip  = module.vpc.aws_nat_gateway.public_ip
+    private_ip = module.vpc.aws_nat_gateway.private_ip
   }
 }
 

@@ -20,7 +20,8 @@ variable "subnet_id" {
 }
 
 variable "security_group_ids" {
-  type = list(string)
+  type    = list(string)
+  default = []
 }
 
 variable "init_script" {

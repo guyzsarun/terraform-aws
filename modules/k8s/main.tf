@@ -6,8 +6,8 @@ module "eks" {
   cluster_name    = var.eks-config.name
   cluster_version = var.eks-config.version
 
-  vpc_id     = aws_vpc.main-vpc.id
-  subnet_ids = [for i in aws_subnet.main-vpc-subnet-private : i.id]
+  vpc_id     = var.vpc_id
+  subnet_ids = var.subnet_id
 
   cluster_endpoint_public_access = true
   eks_managed_node_groups = {

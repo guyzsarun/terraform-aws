@@ -20,11 +20,3 @@ output "nat-gateway" {
     private_ip = module.vpc.aws_nat_gateway.private_ip
   }
 }
-
-output "eks" {
-  value = {
-    cluster_name           = module.k8s.eks.cluster_name
-    cluster_endpoint       = module.k8s.eks.cluster_endpoint
-    get_kubeconfig_command = "aws eks update-kubeconfig --name ${module.k8s.eks.cluster_name}"
-  }
-}

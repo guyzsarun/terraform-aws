@@ -23,8 +23,8 @@ output "nat-gateway" {
 
 output "eks" {
   value = {
-    cluster_name           = module.eks.cluster_name
-    cluster_endpoint       = module.eks.cluster_endpoint
-    get_kubeconfig_command = "aws eks update-kubeconfig --name ${module.eks.cluster_name}"
+    cluster_name           = module.k8s.eks.cluster_name
+    cluster_endpoint       = module.k8s.eks.cluster_endpoint
+    get_kubeconfig_command = "aws eks update-kubeconfig --name ${module.k8s.eks.cluster_name}"
   }
 }

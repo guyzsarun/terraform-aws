@@ -1,6 +1,6 @@
 resource "aws_efs_file_system" "private-nfs" {
-  creation_token         = "private-nfs"
-  throughput_mode        = "elastic"
+  creation_token  = "private-nfs"
+  throughput_mode = "elastic"
 
 
   lifecycle_policy {
@@ -26,5 +26,5 @@ resource "aws_efs_mount_target" "private-nfs-mount" {
   subnet_id       = each.value
   security_groups = [aws_security_group.allow_vpc_ingress.id]
 
-  for_each = { for index,i in aws_subnet.main-vpc-subnet-private: index => i.id }
+  for_each = { for index, i in aws_subnet.main-vpc-subnet-private : index => i.id }
 }

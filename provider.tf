@@ -5,7 +5,7 @@ terraform {
       version = "5.24.0"
     }
     helm = {
-      source = "hashicorp/helm"
+      source  = "hashicorp/helm"
       version = "2.10.1"
     }
   }
@@ -26,7 +26,7 @@ provider "aws" {
 provider "helm" {
   kubernetes {
 
-     host                   = module.k8s.cluster_endpoint
+    host                   = module.k8s.cluster_endpoint
     cluster_ca_certificate = base64decode(module.k8s.cluster_ca_cert)
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"

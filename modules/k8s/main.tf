@@ -76,4 +76,5 @@ locals {
 resource "local_file" "kubeconfig" {
   content  = local.kubeconfig
   filename = "kubeconfig_${module.eks.cluster_name}"
+  depends_on = [ module.eks ]
 }
